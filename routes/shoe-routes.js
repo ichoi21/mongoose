@@ -10,4 +10,10 @@ router.get("/shoe", shoeController.getShoes);
 // this will find a specific shoe with id object
 router.get("/shoe/:id", shoeController.findShoe);
 
+router.patch("/shoe", shoeController.updateBrand);
+
+router.patch("/shoe/price", shoeController.updatePrice);
+
+router.delete("/shoe/:id", shoeController.deleteShoe);
+
 module.exports = router;

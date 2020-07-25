@@ -12,8 +12,6 @@ module.exports = {
   // },
   addShoe: async (req, res) => {
     const newShoe = new Shoe({ brand: req.body.brand, price: req.body.price });
-    // console.log(newShoe);
-
     try {
       await newShoe.save();
       res.send(newShoe);
@@ -47,6 +45,48 @@ module.exports = {
       const foundShoe = await Shoe.findById(req.params.id);
       //foundShoe.brand = "Adidas";
       res.send(foundShoe);
+    } catch (err) {
+      res.send(err);
+    }
+  },
+
+  updateBrand: async (req, res) => {
+    // Shoe.findByIdAndUpdate(
+    //   req.body.id,
+    //   { $set: { brand: req.body.brand } }
+    // )
+    //   .then((foundShoe) => res.send(foundShoe))
+    //   .catch((err) => res.send(err));
+
+    try {
+      const updateShoe = await Shoe.findById(req.body.id);
+      updateShoe.brand = req.body.brand;
+      await updateShoe.save();
+      res.send(updateShoe);
+    } catch (err) {
+      res.send(err);
+    }
+  },
+
+  updatePrice: async (req, res) => {
+    try {
+      const updateShoe = await Shoe.findById(req.body.id);
+      updateShoe.price = req.body.price;
+      await updateShoe.save();
+      res.send(updateShoe);
+    } catch (err) {
+      res.send(err);
+    }
+  },
+
+  deleteShoe: async (req, res) => {
+    // Shoe.findByIdAndDelete(req.params.id)
+    //   .then((response) => res.send(response))
+    //   .catch((err) => res.send(err));
+    try {
+      const shoeToDelete = await Shoe.findById(req.params.id);
+      shoeToDelete.remove();
+      res.send("Shoes Removed");
     } catch (err) {
       res.send(err);
     }

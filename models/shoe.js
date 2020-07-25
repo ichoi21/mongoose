@@ -19,6 +19,16 @@ const shoeSchema = new Schema({
   },
 });
 
+shoeSchema.pre("save", (next) => {
+  console.log("This is going to save");
+  next();
+});
+
+shoeSchema.pre("remove", (next) => {
+  console.log("This is going to remove");
+  next();
+});
+
 const Shoe = mongoose.model("Shoe", shoeSchema);
 
 module.exports = Shoe;
